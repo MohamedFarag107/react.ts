@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "./baseurl";
+import { CreateGuest } from "../types/auth.type";
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
@@ -18,8 +19,8 @@ export const authApi = createApi({
       query: () => `/auth/get-me`,
       providesTags: ["user"],
     }),
-    createGuest: builder.mutation({
-      query: () => ({
+    createGuest: builder.mutation<CreateGuest, {}>({
+      query: ({}) => ({
         url: "/auth/guest",
         method: "POST",
       }),

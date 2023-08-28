@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary: "rgb(29, 46, 162)",
         black: {
           100: "#d3d3d3",
           200: "#a7a7a7",
@@ -23,7 +24,7 @@ export default {
 
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1rem",
     },
   },
   plugins: [],

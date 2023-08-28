@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply !bg-black-600 !text-black-100
+  @apply !bg-black-700 !min-h-screen;
 }
 
 .gelatine {
