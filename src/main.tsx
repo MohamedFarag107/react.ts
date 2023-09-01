@@ -5,15 +5,17 @@ import "./index.css";
 import { Provider } from "react-redux";
 import { store } from "./api";
 import "./translations/i18n.ts";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, StyledEngineProvider } from "@mui/material";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
-    <Provider store={store}>
-      <BrowserRouter>
-        <CssBaseline />
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <StyledEngineProvider injectFirst>
+      <Provider store={store}>
+        <BrowserRouter>
+          <CssBaseline />
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </StyledEngineProvider>
   </>
 );

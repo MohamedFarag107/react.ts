@@ -8,6 +8,8 @@ export default {
     extend: {
       colors: {
         primary: "rgb(29, 46, 162)",
+        secondary: "#1565c0",
+        danger: "rgb(239, 68, 68)",
         black: {
           100: "#d3d3d3",
           200: "#a7a7a7",

@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: "Noto Kufi Arabic", sans-serif !important;
+}
+
 body {
-  @apply !bg-black-700 !min-h-screen;
+  @apply !bg-black-200 !min-h-screen;
 }
 
 .gelatine {

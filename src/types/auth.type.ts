@@ -1,7 +1,5 @@
-export interface CreateGuest {
-  statusCode: number;
-  name: string;
-  message: string;
+import { BaseResponse } from "./baseResponse.type";
+export interface CreateGuest extends BaseResponse {
   data: {
     token: string;
   };
