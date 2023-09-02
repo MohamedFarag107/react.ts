@@ -1,4 +1,5 @@
 {
+  "store": "xtreme",
   "required": "*مطلوب",
   "home": "الرئيسية",
   "about": "حول",
@@ -25,5 +26,14 @@
   "product": "المنتج",
   "products": "المنتجات",
   "cart": "سلة التسوق",
-  "wishlist": "المفضلة"
+  "wishlist": "المفضلة",
+  "dash": "لوحة التحكم",
+  "profile": "الملف الشخصي",
+  "order": "الطلب",
+  "orders": "الطلبات",
+  "brand": "العلامة التجارية",
+  "brands": "العلامات التجارية",
+  "instalment": "التقسيط",
+  "instalments": "الاقساط",
+  "slider": "سليدر"
 }

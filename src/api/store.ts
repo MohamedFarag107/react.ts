@@ -5,19 +5,28 @@ import { authApi } from "./auth.api";
 import { globalReducer } from "./slices";
 import { categoryApi } from "./category.api";
 import { cartApi } from "./cart.api";
+import { wishlistApi } from "./wishlist.api";
+import { brandApi } from "./brand.api";
+import { productApi } from "./product.api";
 
 const createStore = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [cartApi.reducerPath]: cartApi.reducer,
+    [wishlistApi.reducerPath]: wishlistApi.reducer,
+    [brandApi.reducerPath]: brandApi.reducer,
+    [productApi.reducerPath]: productApi.reducer,
     global: globalReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       authApi.middleware,
       categoryApi.middleware,
-      cartApi.middleware
+      cartApi.middleware,
+      wishlistApi.middleware,
+      brandApi.middleware,
+      productApi.middleware
     ),
 });
 

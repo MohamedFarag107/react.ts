@@ -1,4 +1,5 @@
 {
+  "store": "xtreme",
   "required": "*required",
   "home": "Home",
   "about": "About",
@@ -16,14 +17,23 @@
   "delete": "Delete",
   "category": "Category",
   "categories": "Categories",
-  "category_error": "error while fetching categories",
+  "category_error": "error while fetching categodashries",
   "category_empty": "no categories found",
-  "subcategory": "Subcategory",
-  "subcategories": "Subcategories",
+  "subcategory": "Sub category",
+  "subcategories": "Sub categories",
   "subcategory_error": "error while fetching subcategories",
   "subcategory_empty": "no subcategories found",
   "product": "Product",
   "products": "Products",
   "cart": "Cart",
-  "wishlist": "Wishlist"
+  "wishlist": "Wishlist",
+  "dash": "Dashboard",
+  "profile": "profile",
+  "order": "order",
+  "orders": "orders",
+  "brand": "brand",
+  "brands": "brands",
+  "instalment": "instalment",
+  "instalments": "instalments",
+  "slider": "slider"
 }

@@ -1,3 +1,4 @@
+import { BaseResponse } from "./baseResponse.type";
 import { Brand } from "./brand.type";
 import { Category } from "./category.type";
 import { SubCategory } from "./subCategory.type";
@@ -17,4 +18,7 @@ export interface Product {
   rating: number;
   sold: number;
   piecesSold: number;
+}
+export interface GetAllProductsResponse extends BaseResponse {
+  data: Product[];
 }

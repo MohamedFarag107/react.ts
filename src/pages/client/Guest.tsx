@@ -1,8 +1,7 @@
 import { Outlet } from "react-router-dom";
-import { useCreateGuestMutation } from "../api";
 import { useEffect } from "react";
-import Loading from "./Loading";
-
+import { useCreateGuestMutation } from "../../api/auth.api";
+import Loading from "../Loading";
 function Guest() {
   const [createGuest, { isLoading }] = useCreateGuestMutation();
 

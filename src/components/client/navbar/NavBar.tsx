@@ -7,16 +7,17 @@ import {
   Skeleton,
   styled,
 } from "@mui/material";
-import { useAppSelector, useGetAllCategoriesQuery } from "../../api";
 import { useTranslation } from "react-i18next";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { HiMenu, HiShoppingCart } from "react-icons/hi";
 import { FaHeart, FaUserAlt } from "react-icons/fa";
 import { useState } from "react";
 import clsx from "clsx";
-import ApiRender from "../ui/api/ApiRender";
+import ApiRender from "../../ui/api/ApiRender";
 import { useNavigate } from "react-router-dom";
-import { useGetMyCartQuery } from "../../api/cart.api";
+import { useGetMyCartQuery } from "../../../api/cart.api";
+import { useGetMyWishlistQuery } from "../../../api/wishlist.api";
+import { useGetAllCategoriesQuery } from "../../../api/category.api";
 
 const CategoryMenu = () => {
   const { data, isLoading, isSuccess, isError, error } =
@@ -25,6 +26,9 @@ const CategoryMenu = () => {
     t,
     i18n: { language },
   } = useTranslation();
+  if (isError) {
+    console.log({ error });
+  }
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openMenu = Boolean(anchorEl);
@@ -43,7 +47,7 @@ const CategoryMenu = () => {
   return (
     <>
       <Button
-        className="h-full grid grid-cols-3 place-items-center gap-2 rounded-none bg-primary hover:bg-secondary"
+        className="h-full capitalize grid grid-cols-3 place-items-center gap-2 rounded-none bg-primary hover:bg-secondary"
         variant="contained"
         id="demo-positioned-button"
         aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -97,15 +101,34 @@ const CategoryMenu = () => {
 };
 const StyledBadge = styled(Badge)<BadgeProps>(() => ({
   "& .MuiBadge-badge": {
-    left: 10,
-    top: -2,
+    left: 0,
+    top: -1,
   },
 }));
 
 const NavIcons = () => {
-  const { data, isLoading, isSuccess, isError, error } = useGetMyCartQuery({
+  const {
+    data: cart,
+    isSuccess: cartIsSuccess,
+    isError: cartIsError,
+    error: cartError,
+  } = useGetMyCartQuery({
     query: "?sort=createdAt",
   });
+  if (cartIsError) {
+    console.log({ cartError });
+  }
+  const {
+    data: wishlist,
+    isSuccess: wishlistIsSuccess,
+    isError: wishlistIsError,
+    error: wishlistError,
+  } = useGetMyWishlistQuery({
+    query: "?sort=createdAt",
+  });
+  if (wishlistIsError) {
+    console.log({ wishlistError });
+  }
   const navigate = useNavigate();
   const {
     i18n: { language, changeLanguage },
@@ -116,30 +139,49 @@ const NavIcons = () => {
         <Button
           variant="contained"
           className="p-0 !w-10 !h-10 text-white rounded-none flex justify-center items-center bg-primary hover:bg-secondary"
+          sx={{
+            minWidth: 0,
+          }}
           onClick={() => navigate("/cart")}
         >
-          <StyledBadge showZero badgeContent={isSuccess ? data.data.length : 0}>
+          <StyledBadge
+            showZero
+            badgeContent={cartIsSuccess && cart.data.length}
+          >
             <HiShoppingCart className="h-5 w-5" />
           </StyledBadge>
         </Button>
         <Button
           variant="contained"
           className="p-0 !w-10 !h-10 text-white rounded-none flex justify-center items-center bg-primary hover:bg-secondary"
+          sx={{
+            minWidth: 0,
+          }}
           onClick={() => navigate("/wishlist")}
         >
-          <StyledBadge badgeContent={4}>
+          <StyledBadge
+            showZero
+            badgeContent={wishlistIsSuccess && wishlist.data.length}
+          >
             <FaHeart className="h-5 w-5" />
           </StyledBadge>
         </Button>
         <Button
           variant="contained"
           className="p-0 text-white rounded-none !h-10 !w-10 hidden md:flex justify-center items-center  bg-primary hover:bg-secondary"
+          sx={{
+            minWidth: 0,
+          }}
+          onClick={() => navigate("/profile")}
         >
           <FaUserAlt />
         </Button>
         <Button
           variant="contained"
           className="p-0 text-white rounded-none !h-10 !w-10 hidden md:flex justify-center items-center  bg-primary hover:bg-secondary"
+          sx={{
+            minWidth: 0,
+          }}
           onClick={() => {
             language === "en" ? changeLanguage("ar") : changeLanguage("en");
           }}
@@ -149,6 +191,9 @@ const NavIcons = () => {
         <Button
           variant="contained"
           className="p-0 text-white rounded-none !h-10 !w-10  flex md:hidden justify-center items-center  bg-primary hover:bg-secondary"
+          sx={{
+            minWidth: 0,
+          }}
           onClick={() => {}}
         >
           <HiMenu />
@@ -159,21 +204,20 @@ const NavIcons = () => {
 };
 
 function NavBar() {
-  const { logo, name_ar, name_en } = useAppSelector((state) => state.global);
   const navigate = useNavigate();
   const { t } = useTranslation();
   return (
-    <header className="h-20 flex justify-center items-center bg-white">
+    <header className="h-20 flex justify-center items-center bg-white select-none">
       <nav className="container flex justify-between items-center">
         <div className="flex items-center gap-9">
           <img
             className="h-[70px] w-[70px] object-contain"
-            src={logo}
-            alt={`${name_en} - ${name_ar}`}
+            src="/images/logo.png"
+            alt={t("store")}
           />
           <div className="hidden md:flex gap-5 items-center h-10">
             <Button
-              className="h-full rounded-none bg-primary hover:bg-secondary"
+              className="h-full capitalize rounded-none bg-primary hover:bg-secondary"
               variant="contained"
               onClick={() => navigate("/")}
             >

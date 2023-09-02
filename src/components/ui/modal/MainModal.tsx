@@ -1,5 +1,4 @@
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
@@ -24,7 +23,7 @@ interface MainModalProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
   aria: string;
-  actions: React.ReactNode;
+  actions?: React.ReactNode;
 }
 function MainModal({
   open,
@@ -38,21 +37,20 @@ function MainModal({
     setOpen(false);
   };
   return (
-    <>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby={aria}
-      >
-        <DialogTitle>{title}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id={aria}>{children}</DialogContentText>
-        </DialogContent>
-        <DialogActions>{actions}</DialogActions>
-      </Dialog>
-    </>
+    <Dialog
+      open={open}
+      TransitionComponent={Transition}
+      keepMounted
+      onClose={handleClose}
+      aria-describedby={aria}
+      maxWidth={'lg'}
+    >
+      <DialogTitle>{title}</DialogTitle>
+      <DialogContent>
+        <DialogContentText id={aria}>{children}</DialogContentText>
+      </DialogContent>
+      <DialogActions>{actions}</DialogActions>
+    </Dialog>
   );
 }
 

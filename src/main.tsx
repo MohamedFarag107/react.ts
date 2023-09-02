@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import "./index.css";
 import { Provider } from "react-redux";
-import { store } from "./api";
+import { store } from "./api/store.ts";
 import "./translations/i18n.ts";
 import { CssBaseline, StyledEngineProvider } from "@mui/material";
 
