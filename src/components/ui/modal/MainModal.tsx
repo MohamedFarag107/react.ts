@@ -3,7 +3,6 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
   Slide,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
@@ -21,17 +20,15 @@ interface MainModalProps {
   children: React.ReactNode;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  title: string;
   aria: string;
-  actions?: React.ReactNode;
+  fullScreen?: boolean;
 }
 function MainModal({
   open,
   setOpen,
-  title,
   aria,
   children,
-  actions,
+  fullScreen,
 }: MainModalProps) {
   const handleClose = () => {
     setOpen(false);
@@ -43,13 +40,10 @@ function MainModal({
       keepMounted
       onClose={handleClose}
       aria-describedby={aria}
-      maxWidth={'lg'}
+      maxWidth={"lg"}
+      fullScreen={fullScreen}
     >
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id={aria}>{children}</DialogContentText>
-      </DialogContent>
-      <DialogActions>{actions}</DialogActions>
+      <DialogContent>{children}</DialogContent>
     </Dialog>
   );
 }

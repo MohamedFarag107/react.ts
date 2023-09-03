@@ -51,5 +51,20 @@
   "productCard": {
     "edit": "edit",
     "delete": "delete"
+  },
+  "internet_error": "no internet connection",
+  "delete_warning": {
+    "title": "delete {{name}}",
+    "subtitle": "you're going to delete the \"{{name}}\".",
+    "sure": "are you sure?",
+    "no": "no, keep it.",
+    "yes": "yes, delete."
+  },
+  "add_modal": {
+    "title": "add {{name}}",
+    "subtitle": "you're going to add a new \"{{name}}\".",
+    "sure": "are you sure?",
+    "no": "no, keep it.",
+    "yes": "yes, add."
   }
 }

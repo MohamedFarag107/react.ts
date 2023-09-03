@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useGetAllProductsQuery } from "../../../api/product.api";
 import CustomPagination from "../../ui/pagination/CustomPagination";
-import { Skeleton } from "@mui/material";
-import ProductCard from "./ProductCard";
+import { ProductCard, ProductCardSkeleton } from "./ProductCard";
+import InternetError from "../../ui/error/InternetError";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -16,7 +16,7 @@ const Layout = ({ children }: LayoutProps) => (
 function Products() {
   const [page, setPage] = useState(1);
   const { data, isLoading, isError, isSuccess, error } = useGetAllProductsQuery(
-    { query: `?sort=createdAt&page=${page}` }
+    { query: `?page=${page}` }
   );
 
   const [totalPages, setTotalPages] = useState(1);
@@ -25,19 +25,13 @@ function Products() {
       setTotalPages(data?.pagination?.totalPages || 1);
     }
   }, [data]);
-  useEffect(() => {
-    const id = setTimeout(() => {
-      // getAllProducts({ query: `?page=${page}` });
-    }, 500);
-    return () => clearTimeout(id);
-  }, [page]);
 
   if (isLoading) {
     return (
       <Layout>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
           {Array.from({ length: 10 }).map((_, i) => (
-            <Skeleton key={i} variant="rectangular" className="w-full h-60" />
+            <ProductCardSkeleton key={i} />
           ))}
         </div>
       </Layout>
@@ -56,7 +50,7 @@ function Products() {
     const products = data.data;
     return (
       <Layout>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
           {products.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
@@ -70,7 +64,7 @@ function Products() {
     );
   }
 
-  return null;
+  return <InternetError name="products" />;
 }
 
 export default Products;

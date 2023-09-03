@@ -25,7 +25,11 @@ export const productApi = createApi({
       query: ({ query }) => `${query}`,
       providesTags: ["product"],
     }),
+    deleteProduct: builder.mutation<void, { id: string }>({
+      query: ({ id }) => ({ url: `/${id}`, method: "DELETE" }),
+      invalidatesTags: ["product"],
+    }),
   }),
 });
 
-export const { useGetAllProductsQuery } = productApi;
+export const { useGetAllProductsQuery, useDeleteProductMutation } = productApi;

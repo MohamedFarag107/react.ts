@@ -51,5 +51,13 @@
   "productCard": {
     "edit": "تعديل",
     "delete": "حذف"
+  },
+  "internet_error": "لا يوجد اتصال بالإنترنت",
+  "delete_warning": {
+    "title": "حذف {{name}}",
+    "subtitle": ".سوف يتم حذف \"{{name}}\" نهائياً",
+    "sure": "هل أنت متأكد؟",
+    "no": ".لا، ابقها",
+    "yes": ".نعم، احذف"
   }
 }
