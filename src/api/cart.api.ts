@@ -17,7 +17,7 @@ export const cartApi = createApi({
   tagTypes: ["cart"],
   endpoints: (builder) => ({
     getMyCart: builder.query<GetMyCartResponse, { query: string }>({
-      query: ({ query = "" }) => `/${query}`,
+      query: ({ query = "" }) => `/me${query}`,
       providesTags: ["cart"],
     }),
   }),

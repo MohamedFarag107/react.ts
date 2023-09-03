@@ -1,6 +1,12 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  BaseQueryFn,
+  FetchArgs,
+  createApi,
+  fetchBaseQuery,
+} from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "./baseurl";
 import { GetAllProductsResponse } from "../types/product.type";
+import { ApiError } from "../types/apiError.type";
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
@@ -12,19 +18,14 @@ export const productApi = createApi({
       }
       return headers;
     },
-  }),
+  }) as BaseQueryFn<string | FetchArgs, unknown, ApiError, {}>,
   tagTypes: ["product"],
   endpoints: (builder) => ({
-    getAllProducts: builder.mutation<GetAllProductsResponse, { query: string }>(
-      {
-        query: ({ query }) => ({
-          url: `${query}`,
-          method: "GET",
-        }),
-        invalidatesTags: ["product"],
-      }
-    ),
+    getAllProducts: builder.query<GetAllProductsResponse, { query: string }>({
+      query: ({ query }) => `${query}`,
+      providesTags: ["product"],
+    }),
   }),
 });
 
-export const { useGetAllProductsMutation } = productApi;
+export const { useGetAllProductsQuery } = productApi;

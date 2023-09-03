@@ -19,7 +19,7 @@ export const categoryApi = createApi({
       GetAllCategoriesResponse,
       { query: string }
     >({
-      query: ({ query = "" }) => `/${query}`,
+      query: ({ query = "" }) => `${query}`,
       providesTags: ["category"],
     }),
   }),

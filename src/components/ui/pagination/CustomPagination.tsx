@@ -27,6 +27,10 @@ function CustomPagination({
           previous: BsFillArrowRightSquareFill,
           next: BsFillArrowLeftSquareFill,
         };
+
+  const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
   return (
     <Pagination
       renderItem={(item) => (
@@ -39,7 +43,7 @@ function CustomPagination({
           className="text-primary"
         />
       )}
-      onChange={(_, value) => setPage(value)}
+      onChange={handlePageChange}
       page={page}
       count={totalPages}
       shape="rounded"

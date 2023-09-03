@@ -11,13 +11,14 @@ import { useTranslation } from "react-i18next";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { HiMenu, HiShoppingCart } from "react-icons/hi";
 import { FaHeart, FaUserAlt } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import ApiRender from "../../ui/api/ApiRender";
 import { useNavigate } from "react-router-dom";
 import { useGetMyCartQuery } from "../../../api/cart.api";
 import { useGetMyWishlistQuery } from "../../../api/wishlist.api";
 import { useGetAllCategoriesQuery } from "../../../api/category.api";
+import { toast } from "react-hot-toast";
 
 const CategoryMenu = () => {
   const { data, isLoading, isSuccess, isError, error } =
@@ -107,28 +108,15 @@ const StyledBadge = styled(Badge)<BadgeProps>(() => ({
 }));
 
 const NavIcons = () => {
-  const {
-    data: cart,
-    isSuccess: cartIsSuccess,
-    isError: cartIsError,
-    error: cartError,
-  } = useGetMyCartQuery({
+  const { data: cart, isSuccess: cartIsSuccess } = useGetMyCartQuery({
     query: "?sort=createdAt",
   });
-  if (cartIsError) {
-    console.log({ cartError });
-  }
-  const {
-    data: wishlist,
-    isSuccess: wishlistIsSuccess,
-    isError: wishlistIsError,
-    error: wishlistError,
-  } = useGetMyWishlistQuery({
-    query: "?sort=createdAt",
-  });
-  if (wishlistIsError) {
-    console.log({ wishlistError });
-  }
+
+  const { data: wishlist, isSuccess: wishlistIsSuccess } =
+    useGetMyWishlistQuery({
+      query: "?sort=createdAt",
+    });
+
   const navigate = useNavigate();
   const {
     i18n: { language, changeLanguage },
@@ -146,7 +134,7 @@ const NavIcons = () => {
         >
           <StyledBadge
             showZero
-            badgeContent={cartIsSuccess && cart.data.length}
+            badgeContent={(cartIsSuccess && cart.data.length) || 0}
           >
             <HiShoppingCart className="h-5 w-5" />
           </StyledBadge>
@@ -161,7 +149,7 @@ const NavIcons = () => {
         >
           <StyledBadge
             showZero
-            badgeContent={wishlistIsSuccess && wishlist.data.length}
+            badgeContent={(wishlistIsSuccess && wishlist.data.length) || 0}
           >
             <FaHeart className="h-5 w-5" />
           </StyledBadge>

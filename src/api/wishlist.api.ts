@@ -17,7 +17,7 @@ export const wishlistApi = createApi({
   tagTypes: ["wishlist"],
   endpoints: (builder) => ({
     getMyWishlist: builder.query<GetMyWishlistResponse, { query: string }>({
-      query: ({ query = "" }) => `/${query}`,
+      query: ({ query = "" }) => `/me${query}`,
       providesTags: ["wishlist"],
     }),
   }),

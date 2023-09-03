@@ -1,7 +1,7 @@
 {
-  "store": "xtreme",
+  "store": "إكستريم",
   "required": "*مطلوب",
-  "home": "الرئيسية",
+  "home": "الصفحة الرئيسية",
   "about": "حول",
   "contact": "اتصل بنا",
   "sign_in": "تسجيل الدخول",
@@ -34,6 +34,22 @@
   "brand": "العلامة التجارية",
   "brands": "العلامات التجارية",
   "instalment": "التقسيط",
-  "instalments": "الاقساط",
-  "slider": "سليدر"
+  "instalments": "التقسيطات",
+  "slider": "الشريط الجانبي",
+  "show": "عرض",
+  "description": "الوصف",
+  "price": "السعر",
+  "quantity": "الكمية",
+  "image": "الصورة",
+  "images": "الصور",
+  "add_to_cart": "إضافة إلى السلة",
+  "add_to_wishlist": "إضافة إلى المفضلة",
+  "remove_from_cart": "إزالة من السلة",
+  "remove_from_wishlist": "إزالة من المفضلة",
+  "cart_empty": "السلة فارغة",
+  "wishlist_empty": "المفضلة فارغة",
+  "productCard": {
+    "edit": "تعديل",
+    "delete": "حذف"
+  }
 }

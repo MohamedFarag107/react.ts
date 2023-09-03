@@ -35,5 +35,21 @@
   "brands": "brands",
   "instalment": "instalment",
   "instalments": "instalments",
-  "slider": "slider"
+  "slider": "slider",
+  "show": "show",
+  "description": "description",
+  "price": "price",
+  "quantity": "quantity",
+  "image": "image",
+  "images": "images",
+  "add_to_cart": "add to cart",
+  "add_to_wishlist": "add to wishlist",
+  "remove_from_cart": "remove from cart",
+  "remove_from_wishlist": "remove from wishlist",
+  "cart_empty": "cart is empty",
+  "wishlist_empty": "wishlist is empty",
+  "productCard": {
+    "edit": "edit",
+    "delete": "delete"
+  }
 }

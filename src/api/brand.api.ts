@@ -16,7 +16,7 @@ export const brandApi = createApi({
   tagTypes: ["brand"],
   endpoints: (builder) => ({
     getAllBrands: builder.query<GetAllBrandsResponse, { query: string }>({
-      query: ({ query = "" }) => `/${query}`,
+      query: ({ query = "" }) => `${query}`,
       providesTags: ["brand"],
     }),
   }),

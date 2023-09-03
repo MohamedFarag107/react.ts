@@ -24,7 +24,7 @@ i18n
       order: ["localStorage", "sessionStorage", "htmlTag"],
       caches: ["localStorage", "cookie"],
     },
-    keySeparator: false,
+    keySeparator: ".",
     interpolation: {
       escapeValue: false,
     },
