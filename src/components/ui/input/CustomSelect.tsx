@@ -1,48 +1,94 @@
-import { FormHelperText, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Brand } from "../../../types/brand.type";
 import { Category } from "../../../types/category.type";
 import { SubCategory } from "../../../types/subCategory.type";
 import { useTranslation } from "react-i18next";
+import RTL from "../../../utils/RTL";
 
 interface CustomSelectProps {
+  dir: "ltr" | "rtl";
   data: Category[] | SubCategory[] | Brand[];
-  setFieldValue: (key: string, value: any) => void;
+  onChange: (e: any) => void;
+  onBlur: (e: any) => void;
   value: string;
   label: string;
-  key: string;
+  name: string;
+  isError: boolean;
 }
 
 function CustomSelect({
+  dir,
   data,
-  setFieldValue,
-  key,
+  onChange,
+  onBlur,
+  name,
   value,
   label,
+  isError,
 }: CustomSelectProps) {
   const {
+    t,
     i18n: { language },
   } = useTranslation();
-  return (
-    <div>
-      <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
+
+  return dir === "ltr" ? (
+    <FormControl fullWidth error={isError}>
+      <InputLabel id={`${name}-select-id`}>{label}</InputLabel>
       <Select
-        labelId="demo-simple-select-helper-label"
-        id="demo-simple-select-helper"
+        labelId={`${name}-select-id`}
+        id={name}
+        name={name}
         value={value}
         label={label}
-        onChange={(value) => {
-          setFieldValue(key, value);
-        }}
+        placeholder="Select"
+        onChange={onChange}
+        onBlur={onBlur}
       >
+        <MenuItem dir={dir} className="capitalize" value="">
+          {t("not_selected")}
+        </MenuItem>
         {data.map((item) => (
-          <MenuItem value={item._id}>
+          <MenuItem
+            dir={dir}
+            className="capitalize"
+            key={item._id}
+            value={item._id}
+          >
             {language === "en" ? item.name_en : item.name_ar}
           </MenuItem>
         ))}
-        <MenuItem value={10}>Ten</MenuItem>
       </Select>
-      <FormHelperText>With label + helper text</FormHelperText>
-    </div>
+    </FormControl>
+  ) : (
+    <RTL>
+      <FormControl fullWidth error={isError}>
+        <InputLabel id={`${name}-select-id`}>{label}</InputLabel>
+        <Select
+          labelId={`${name}-select-id`}
+          id={name}
+          name={name}
+          value={value}
+          label={label}
+          placeholder="Select"
+          onChange={onChange}
+          onBlur={onBlur}
+        >
+          <MenuItem dir={dir} className="capitalize" value="">
+            {t("not_selected")}
+          </MenuItem>
+          {data.map((item) => (
+            <MenuItem
+              dir={dir}
+              className="capitalize"
+              key={item._id}
+              value={item._id}
+            >
+              {language === "en" ? item.name_en : item.name_ar}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </RTL>
   );
 }
 

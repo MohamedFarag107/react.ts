@@ -14,6 +14,7 @@
   "cancel": "إلغاء",
   "submit": "إرسال",
   "edit": "تعديل",
+  "create": "اضافة",
   "delete": "حذف",
   "category": "الفئة",
   "categories": "الفئات",
@@ -39,6 +40,7 @@
   "show": "عرض",
   "description": "الوصف",
   "price": "السعر",
+  "discount": "الخصم",
   "quantity": "الكمية",
   "image": "الصورة",
   "images": "الصور",
@@ -66,5 +68,9 @@
   "min_description": " الحد  الأدنى للوصف {{min}} حروف",
   "description_en": "الوصف بالإنجليزية",
   "min_images": "الحد الأدنى للصور {{min}} صور",
-  "Invalid_file_type": "نوع الملف غير صالح"
+  "Invalid_file_type": "نوع الملف غير صالح",
+  "not_selected": "لم يتم الاختيار",
+  "price_error": "السعر يجب أن يكون رقم أكبر من 0",
+  "discount_error_min": "الكمية يجب أن تكون رقم أكبر من 0",
+  "discount_error_max": "الخصم يجب أن يكون رقم أقل من سعر المنتج"
 }

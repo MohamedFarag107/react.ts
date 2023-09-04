@@ -22,3 +22,13 @@ export interface Product {
 export interface GetAllProductsResponse extends BaseResponse {
   data: Product[];
 }
+
+export interface GetProductByIdResponse extends BaseResponse {
+  data: Product;
+}
+export interface UpdateProductResponse extends BaseResponse {
+  data: Product;
+}
+export interface CreateProductResponse extends BaseResponse {
+  data: Product;
+}

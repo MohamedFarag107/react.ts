@@ -14,6 +14,7 @@ import { useState } from "react";
 import DeleteWarning from "../../ui/warning/DeleteWarning";
 import { useDeleteProductMutation } from "../../../api/product.api";
 import { toast } from "react-hot-toast";
+import ProductOperations from "./ProductOperations";
 
 interface ProductCardProps {
   product: Product;
@@ -54,6 +55,14 @@ export function ProductCard({ product }: ProductCardProps) {
           isLoading={isLoading}
           subtitle={language === "en" ? product.name_en : product.name_ar}
         />
+      </MainModal>
+      <MainModal
+        fullScreen
+        aria="edit product"
+        open={editModal}
+        setOpen={setEditModal}
+      >
+        <ProductOperations setOpen={setEditModal} data={product} />
       </MainModal>
       <Card className="flex flex-col justify-between">
         <div className="w-full h-56 md:h-60 p-4">

@@ -13,6 +13,7 @@
   "name": "Name",
   "cancel": "Cancel",
   "submit": "Submit",
+  "create": "create",
   "edit": "Edit",
   "delete": "Delete",
   "category": "Category",
@@ -39,6 +40,7 @@
   "show": "show",
   "description": "description",
   "price": "price",
+  "discount": "discount",
   "quantity": "quantity",
   "image": "image",
   "images": "images",
@@ -73,5 +75,9 @@
   "min_description": "minimum description is {{min}} letters",
   "description_en": "English Description",
   "min_images": "minimum number of images is {{min}} image",
-  "Invalid_file_type": "Invalid file type"
+  "Invalid_file_type": "Invalid file type",
+  "not_selected": "not selected",
+  "price_error": "price must be a number greater than 0",
+  "discount_error_min": "discount must be a number greater than 0",
+  "discount_error_max": "discount must be a number less than price"
 }

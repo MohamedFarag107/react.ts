@@ -62,7 +62,6 @@ function App() {
                 <Route path="brands" element={<DashBrands />} />
                 <Route path="profile" element={<DashProfile />} />
               </Route>
-              <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Route>
