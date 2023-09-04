@@ -17,7 +17,7 @@
   "delete": "Delete",
   "category": "Category",
   "categories": "Categories",
-  "category_error": "error while fetching categodashries",
+  "category_error": "error while fetching categories",
   "category_empty": "no categories found",
   "subcategory": "Sub category",
   "subcategories": "Sub categories",
@@ -66,5 +66,12 @@
     "sure": "are you sure?",
     "no": "no, keep it.",
     "yes": "yes, add."
-  }
+  },
+  "name_ar": "Arabic Name",
+  "name_en": "English Name",
+  "description_ar": "Arabic Description",
+  "min_description": "minimum description is {{min}} letters",
+  "description_en": "English Description",
+  "min_images": "minimum number of images is {{min}} image",
+  "Invalid_file_type": "Invalid file type"
 }

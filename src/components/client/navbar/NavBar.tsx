@@ -11,14 +11,13 @@ import { useTranslation } from "react-i18next";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { HiMenu, HiShoppingCart } from "react-icons/hi";
 import { FaHeart, FaUserAlt } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 import ApiRender from "../../ui/api/ApiRender";
 import { useNavigate } from "react-router-dom";
 import { useGetMyCartQuery } from "../../../api/cart.api";
 import { useGetMyWishlistQuery } from "../../../api/wishlist.api";
 import { useGetAllCategoriesQuery } from "../../../api/category.api";
-import { toast } from "react-hot-toast";
 
 const CategoryMenu = () => {
   const { data, isLoading, isSuccess, isError, error } =

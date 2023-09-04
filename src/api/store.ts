@@ -8,6 +8,7 @@ import { cartApi } from "./cart.api";
 import { wishlistApi } from "./wishlist.api";
 import { brandApi } from "./brand.api";
 import { productApi } from "./product.api";
+import { uploadApi } from "./upload.api";
 
 const createStore = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const createStore = configureStore({
     [wishlistApi.reducerPath]: wishlistApi.reducer,
     [brandApi.reducerPath]: brandApi.reducer,
     [productApi.reducerPath]: productApi.reducer,
+    [uploadApi.reducerPath]: uploadApi.reducer,
     global: globalReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -26,7 +28,8 @@ const createStore = configureStore({
       cartApi.middleware,
       wishlistApi.middleware,
       brandApi.middleware,
-      productApi.middleware
+      productApi.middleware,
+      uploadApi.middleware
     ),
 });
 
