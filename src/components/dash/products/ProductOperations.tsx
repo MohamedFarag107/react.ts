@@ -57,7 +57,7 @@ const validationSchema = (t: TFunction<"translation", undefined>) =>
     images: yup
       .array()
       .min(1, t("min_images", { min: 1 }))
-      .of(yup.string().required(t("required")))
+      .of(yup.string().url().required(t("required")))
       .required(t("required")),
     price: yup.number().min(1, t("price_error")).required(t("required")),
     discount: yup
@@ -128,7 +128,7 @@ function ProductOperations({ data, setOpen }: ProductOperationsProps) {
   const formik = useFormik({
     initialValues: initialValues(data),
     validationSchema: validationSchema(t),
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       const { _id, ...rest } = values;
       if (data) {
         updateProduct({ _id, body: rest })
@@ -146,6 +146,7 @@ function ProductOperations({ data, setOpen }: ProductOperationsProps) {
           .then((res) => {
             toast.success(res.message);
             setOpen(false);
+            resetForm();
           })
           .catch((err) => {
             toast.error(err.message);

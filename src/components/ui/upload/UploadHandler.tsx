@@ -1,5 +1,5 @@
 import { Button, CircularProgress } from "@mui/material";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useUploadMutation } from "../../../api/upload.api";
@@ -7,11 +7,16 @@ import clsx from "clsx";
 
 interface UploadHandlerProps {
   onChange: (url: string) => void;
+  value?: string
 }
 
-function UploadHandler({ onChange }: UploadHandlerProps) {
+function UploadHandler({ onChange, value }: UploadHandlerProps) {
   const { t } = useTranslation();
+  const [url, setUrl] = useState<string>(value || '');
   const uploadRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    setUrl(value || '');
+  }, [value])
   const [upload, { isLoading }] = useUploadMutation();
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -29,6 +34,7 @@ function UploadHandler({ onChange }: UploadHandlerProps) {
     upload(formData)
       .unwrap()
       .then((res) => {
+        setUrl(res.data.url);
         onChange(res.data.url);
       });
   };
@@ -55,8 +61,8 @@ function UploadHandler({ onChange }: UploadHandlerProps) {
         onClick={() => uploadRef.current?.click()}
       >
         <img
-          className="w-full h-full object-cover un-selectable"
-          src="/images/placeholder.jpg"
+          className="w-full h-full object-contain un-selectable"
+          src={url || "/images/placeholder.jpg"}
           alt="placeholder"
         />
       </Button>

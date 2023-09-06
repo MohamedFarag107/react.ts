@@ -1,14 +1,23 @@
-import DashBody from "../../../components/dash/body/DashBody";
+import { useState } from "react";
+import DashBody from "../../../components/dash/body/DashBody"; 
+import SubCategoryOperations from "../../../components/dash/subCategories/SubCategoryOperations";
+import MainModal from "../../../components/ui/modal/MainModal";
 import SubCategories from "../../../components/dash/subCategories/SubCategories";
 
 function DashSubCategories() {
+  const [open, setOpen] = useState(false);
   const handleClick = () => {
-    console.log("click");
+    setOpen(true);
   };
   return (
-    <DashBody title="subcategories" onClick={handleClick}>
-      <SubCategories />
-    </DashBody>
+    <>
+      <MainModal   aria="add category" open={open} setOpen={setOpen}>
+        <SubCategoryOperations setOpen={setOpen} />
+      </MainModal>
+      <DashBody title="subcategories" onClick={handleClick}>
+        <SubCategories />
+      </DashBody>
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BaseQueryFn, FetchArgs, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "./baseurl";
-import { GetAllCategoriesResponse } from "../types/category.type";
+import { Category, CreateCategoryResponse, DeleteCategoryResponse, GetAllCategoriesResponse, GetCategoryResponse, UpdateCategoryResponse } from "../types/category.type";
+import { ApiError } from "../types/apiError.type";
 export const categoryApi = createApi({
   reducerPath: "categoryApi",
   baseQuery: fetchBaseQuery({
@@ -12,7 +13,7 @@ export const categoryApi = createApi({
       }
       return headers;
     },
-  }),
+  }) as BaseQueryFn<string | FetchArgs, unknown, ApiError, {}>,
   tagTypes: ["category"],
   endpoints: (builder) => ({
     getAllCategories: builder.query<
@@ -22,7 +23,34 @@ export const categoryApi = createApi({
       query: ({ query = "" }) => `${query}`,
       providesTags: ["category"],
     }),
+    getCategory : builder.query<GetCategoryResponse, {_id: string}>({
+      query: ({ _id }) => `/${_id}`,
+      providesTags: ["category"],
+    }),
+    createCategory: builder.mutation<CreateCategoryResponse, Omit<Category, 'createdAt' | 'updatedAt' | "_id">>({
+      query: ( body ) => ({
+        url: "",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["category"],
+    }),
+    updateCategory: builder.mutation<UpdateCategoryResponse, {_id: string, data: Partial<Omit<Category, 'createdAt' | 'updatedAt'>> }>({
+      query: ({ data ,_id}) => ({
+        url: `/${_id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["category"],
+    }),
+    deleteCategory: builder.mutation<DeleteCategoryResponse, {_id: string}>({
+      query: ({ _id }) => ({
+        url: `/${_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["category"],
+    }),
   }),
-});
+  });
 
-export const { useGetAllCategoriesQuery } = categoryApi;
+export const { useGetAllCategoriesQuery,useGetCategoryQuery, useCreateCategoryMutation, useUpdateCategoryMutation, useDeleteCategoryMutation } = categoryApi;

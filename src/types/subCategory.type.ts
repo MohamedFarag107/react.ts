@@ -11,3 +11,20 @@ export interface SubCategory {
 export interface GetAllSubCategoriesResponse extends BaseResponse {
   data: SubCategory[];
 }
+
+export interface CreateSubCategoryResponse extends BaseResponse {
+  data: SubCategory;
+}
+
+export interface GetSubCategoryResponse extends BaseResponse {
+  data: SubCategory;
+}
+
+export interface UpdateSubCategoryResponse extends BaseResponse {
+  data: SubCategory;
+}
+
+
+export interface DeleteSubCategoryResponse extends BaseResponse {
+  data: SubCategory 
+}

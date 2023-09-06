@@ -12,3 +12,20 @@ export interface Category {
 export interface GetAllCategoriesResponse extends BaseResponse {
   data: Category[];
 }
+
+export interface GetCategoryResponse extends BaseResponse {
+  data: Category;
+}
+
+export interface CreateCategoryResponse extends BaseResponse {
+  data: Category;
+}
+
+export interface UpdateCategoryResponse extends BaseResponse {
+  data: Category;
+}
+
+
+export interface DeleteCategoryResponse extends BaseResponse {
+  data: Category 
+}
