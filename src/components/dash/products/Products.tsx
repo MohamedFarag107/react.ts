@@ -16,7 +16,7 @@ const Layout = ({ children }: LayoutProps) => (
 function Products() {
   const [page, setPage] = useState(1);
   const { data, isLoading, isError, isSuccess, error } = useGetAllProductsQuery(
-    { query: `?page=${page}` }
+    { query: `?sort=-updatedAt&page=${page}` }
   );
 
   const [totalPages, setTotalPages] = useState(1);

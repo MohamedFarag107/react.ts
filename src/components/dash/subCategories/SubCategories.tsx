@@ -16,7 +16,7 @@ const Layout = ({ children }: LayoutProps) => (
 function SubCategories() {
   const [page, setPage] = useState(1);
   const { data, isLoading, isError, isSuccess, error } =
-    useGetAllSubCategoriesQuery({ query: `?page=${page}` });
+    useGetAllSubCategoriesQuery({ query: `?sort=-updatedAt,category&page=${page}` });
 
   const [totalPages, setTotalPages] = useState(1);
   useEffect(() => {

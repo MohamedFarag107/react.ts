@@ -7,16 +7,17 @@ import clsx from "clsx";
 
 interface UploadHandlerProps {
   onChange: (url: string) => void;
-  value?: string
+  error: boolean;
+  value?: string;
 }
 
-function UploadHandler({ onChange, value }: UploadHandlerProps) {
+function UploadHandler({ onChange, value, error }: UploadHandlerProps) {
   const { t } = useTranslation();
-  const [url, setUrl] = useState<string>(value || '');
+  const [url, setUrl] = useState<string>(value || "");
   const uploadRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    setUrl(value || '');
-  }, [value])
+    setUrl(value || "");
+  }, [value]);
   const [upload, { isLoading }] = useUploadMutation();
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -59,6 +60,7 @@ function UploadHandler({ onChange, value }: UploadHandlerProps) {
         variant="outlined"
         className="min-w-0 w-80 aspect-square"
         onClick={() => uploadRef.current?.click()}
+        color={error ? "error" : "primary"}
       >
         <img
           className="w-full h-full object-contain un-selectable"

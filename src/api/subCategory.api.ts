@@ -1,6 +1,18 @@
-import { BaseQueryFn, FetchArgs, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  BaseQueryFn,
+  FetchArgs,
+  createApi,
+  fetchBaseQuery,
+} from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "./baseurl";
-import { CreateSubCategoryResponse, DeleteSubCategoryResponse, GetAllSubCategoriesResponse, GetSubCategoryResponse, SubCategory, UpdateSubCategoryResponse } from "../types/subCategory.type";
+import {
+  CreateSubCategoryResponse,
+  DeleteSubCategoryResponse,
+  GetAllSubCategoriesResponse,
+  GetSubCategoryResponse,
+  SubCategory,
+  UpdateSubCategoryResponse,
+} from "../types/subCategory.type";
 import { ApiError } from "../types/apiError.type";
 export const subCategoryApi = createApi({
   reducerPath: "subCategoryApi",
@@ -23,27 +35,39 @@ export const subCategoryApi = createApi({
       query: ({ query = "" }) => `${query}`,
       providesTags: ["subcategories"],
     }),
-    getSubCategory : builder.query<GetSubCategoryResponse, {_id: string}>({
+    getSubCategory: builder.query<GetSubCategoryResponse, { _id: string }>({
       query: ({ _id }) => `/${_id}`,
       providesTags: ["subcategories"],
     }),
-    createSubCategory: builder.mutation<CreateSubCategoryResponse, Omit<SubCategory, 'createdAt' | 'updatedAt' | "_id">>({
-      query: ( body ) => ({
+    createSubCategory: builder.mutation<
+      CreateSubCategoryResponse,
+      Omit<SubCategory, "createdAt" | "updatedAt" | "_id">
+    >({
+      query: (body) => ({
         url: "",
         method: "POST",
         body,
       }),
       invalidatesTags: ["subcategories"],
     }),
-    updateSubCategory: builder.mutation<UpdateSubCategoryResponse, {_id: string, data: Partial<Omit<SubCategory, 'createdAt' | 'updatedAt'>> }>({
-      query: ({ data ,_id}) => ({
+    updateSubCategory: builder.mutation<
+      UpdateSubCategoryResponse,
+      {
+        _id: string;
+        data: Partial<Omit<SubCategory, "createdAt" | "updatedAt" | "_id">>;
+      }
+    >({
+      query: ({ data, _id }) => ({
         url: `/${_id}`,
         method: "PUT",
         body: data,
       }),
       invalidatesTags: ["subcategories"],
     }),
-    deleteSubCategory: builder.mutation<DeleteSubCategoryResponse, {_id: string}>({
+    deleteSubCategory: builder.mutation<
+      DeleteSubCategoryResponse,
+      { _id: string }
+    >({
       query: ({ _id }) => ({
         url: `/${_id}`,
         method: "DELETE",
@@ -53,4 +77,10 @@ export const subCategoryApi = createApi({
   }),
 });
 
-export const { useGetAllSubCategoriesQuery,useGetSubCategoryQuery, useCreateSubCategoryMutation, useDeleteSubCategoryMutation, useUpdateSubCategoryMutation } = subCategoryApi;
+export const {
+  useGetAllSubCategoriesQuery,
+  useGetSubCategoryQuery,
+  useCreateSubCategoryMutation,
+  useDeleteSubCategoryMutation,
+  useUpdateSubCategoryMutation,
+} = subCategoryApi;

@@ -1,6 +1,18 @@
-import { BaseQueryFn, FetchArgs, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  BaseQueryFn,
+  FetchArgs,
+  createApi,
+  fetchBaseQuery,
+} from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "./baseurl";
-import { Category, CreateCategoryResponse, DeleteCategoryResponse, GetAllCategoriesResponse, GetCategoryResponse, UpdateCategoryResponse } from "../types/category.type";
+import {
+  Category,
+  CreateCategoryResponse,
+  DeleteCategoryResponse,
+  GetAllCategoriesResponse,
+  GetCategoryResponse,
+  UpdateCategoryResponse,
+} from "../types/category.type";
 import { ApiError } from "../types/apiError.type";
 export const categoryApi = createApi({
   reducerPath: "categoryApi",
@@ -9,7 +21,7 @@ export const categoryApi = createApi({
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       if (token) {
-         headers.set("Authorization", `Bearer ${token}`);
+        headers.set("Authorization", `Bearer ${token}`);
       }
       return headers;
     },
@@ -23,27 +35,36 @@ export const categoryApi = createApi({
       query: ({ query = "" }) => `${query}`,
       providesTags: ["category"],
     }),
-    getCategory : builder.query<GetCategoryResponse, {_id: string}>({
+    getCategory: builder.query<GetCategoryResponse, { _id: string }>({
       query: ({ _id }) => `/${_id}`,
       providesTags: ["category"],
     }),
-    createCategory: builder.mutation<CreateCategoryResponse, Omit<Category, 'createdAt' | 'updatedAt' | "_id">>({
-      query: ( body ) => ({
+    createCategory: builder.mutation<
+      CreateCategoryResponse,
+      Omit<Category, "createdAt" | "updatedAt" | "_id">
+    >({
+      query: (body) => ({
         url: "",
         method: "POST",
         body,
       }),
       invalidatesTags: ["category"],
     }),
-    updateCategory: builder.mutation<UpdateCategoryResponse, {_id: string, data: Partial<Omit<Category, 'createdAt' | 'updatedAt'>> }>({
-      query: ({ data ,_id}) => ({
+    updateCategory: builder.mutation<
+      UpdateCategoryResponse,
+      {
+        _id: string;
+        data: Partial<Omit<Category, "createdAt" | "updatedAt" | "_id">>;
+      }
+    >({
+      query: ({ data, _id }) => ({
         url: `/${_id}`,
         method: "PUT",
         body: data,
       }),
       invalidatesTags: ["category"],
     }),
-    deleteCategory: builder.mutation<DeleteCategoryResponse, {_id: string}>({
+    deleteCategory: builder.mutation<DeleteCategoryResponse, { _id: string }>({
       query: ({ _id }) => ({
         url: `/${_id}`,
         method: "DELETE",
@@ -51,6 +72,12 @@ export const categoryApi = createApi({
       invalidatesTags: ["category"],
     }),
   }),
-  });
+});
 
-export const { useGetAllCategoriesQuery,useGetCategoryQuery, useCreateCategoryMutation, useUpdateCategoryMutation, useDeleteCategoryMutation } = categoryApi;
+export const {
+  useGetAllCategoriesQuery,
+  useGetCategoryQuery,
+  useCreateCategoryMutation,
+  useUpdateCategoryMutation,
+  useDeleteCategoryMutation,
+} = categoryApi;

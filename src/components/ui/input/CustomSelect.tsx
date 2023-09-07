@@ -31,6 +31,13 @@ function CustomSelect({
     i18n: { language },
   } = useTranslation();
 
+  if (data.length === 0)
+    return (
+      <h3 className="text-danger">
+        {label} - {t("no_data")}
+      </h3>
+    );
+
   return dir === "ltr" ? (
     <FormControl fullWidth error={isError}>
       <InputLabel id={`${name}-select-id`}>{label}</InputLabel>

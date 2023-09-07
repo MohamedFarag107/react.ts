@@ -81,5 +81,6 @@
   "discount_error_min": "discount must be a number greater than 0",
   "discount_error_max": "discount must be a number less than price",
   "min_text": "minimum number of letters is {{min}} letters",
-  "max_text": "maximum number of letters is {{max}} letters"
+  "max_text": "maximum number of letters is {{max}} letters",
+  "no_data": "no data found"
 }

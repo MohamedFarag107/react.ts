@@ -143,26 +143,26 @@ function SubCategoryOperations({ data, setOpen }: SubCategoryOperationsProps) {
                 onBlur={formik.handleBlur}
                 variant="outlined"
               />
-              {categorySuccess && (
-                <CustomSelect
-                  dir={dir}
-                  data={categories?.data || []}
-                  label={t("categories")}
-                  name="category"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={
-                    typeof formik.values.category === "string"
-                      ? formik.values.category
-                      : formik.values.category._id
-                  }
-                  isError={
-                    formik.touched?.category && formik.errors?.category
-                      ? true
-                      : false
-                  }
-                />
-              )}
+
+              <CustomSelect
+                dir={dir}
+                data={categories?.data || []}
+                label={t("categories")}
+                name="category"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={
+                  typeof formik.values.category === "string"
+                    ? formik.values.category
+                    : formik.values.category._id
+                }
+                isError={
+                  formik.touched?.category && formik.errors?.category
+                    ? true
+                    : false
+                }
+              />
+
               {formik.touched.category && formik.errors.category && (
                 <div className="text-red-500 text-start pb-2 capitalize">
                   {formik.errors.category}
@@ -171,18 +171,20 @@ function SubCategoryOperations({ data, setOpen }: SubCategoryOperationsProps) {
             </div>
             {/* product image */}
             <div className="flex flex-col gap-3">
-              {formik.touched.image && formik.errors.image && (
-                <div className="text-red-500 text-center pb-2 capitalize">
-                  {formik.errors.image}
-                </div>
-              )}
               <UploadHandler
                 value={formik.values.image}
                 onChange={(file) => {
                   formik.setFieldValue("image", file);
                 }}
+                error={
+                  formik.touched.image && formik.errors.image ? true : false
+                }
               />
-              {/* <SelectedImages images={formik.values.images} formik={formik} /> */}
+              {formik.touched.image && formik.errors.image && (
+                <div className="text-red-500 text-center pb-2 capitalize">
+                  {formik.errors.image}
+                </div>
+              )}
             </div>
             {/* product images */}
           </div>

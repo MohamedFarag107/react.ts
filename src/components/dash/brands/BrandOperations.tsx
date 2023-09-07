@@ -7,20 +7,22 @@ import { Button, CircularProgress } from "@mui/material";
 import { AiFillCloseSquare } from "react-icons/ai";
 import CustomTextField from "../../ui/input/CustomTextField";
 import UploadHandler from "../../ui/upload/UploadHandler";
-import {
-  useCreateCategoryMutation,
-  useUpdateCategoryMutation,
-} from "../../../api/category.api";
-import { toast } from "react-hot-toast";
 
-interface CategoryOperationsProps {
-  data?: Category;
+import { toast } from "react-hot-toast";
+import {
+  useCreateBrandMutation,
+  useUpdateBrandMutation,
+} from "../../../api/brand.api";
+import { Brand } from "../../../types/brand.type";
+
+interface BrandOperationsProps {
+  data?: Brand;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const initialValues = (
-  data?: Category
-): Omit<Category, "createdAt" | "updatedAt"> => ({
+  data?: Brand
+): Omit<Brand, "createdAt" | "updatedAt" | "slug"> => ({
   name_ar: data?.name_ar || "",
   name_en: data?.name_en || "",
   image: data?.image || "",
@@ -41,14 +43,14 @@ const validationSchema = (t: TFunction<"translation", undefined>) =>
       .max(50, t("max_text", { max: 50 }))
       .trim()
       .required(t("required")),
-    image: yup.string().url().optional(),
+    image: yup.string().url().required(t("required")),
   });
 
-function CategoryOperations({ setOpen, data }: CategoryOperationsProps) {
-  const [createCategory, { isLoading: createCategoryLoading }] =
-    useCreateCategoryMutation();
-  const [updateCategory, { isLoading: updateCategoryLoading }] =
-    useUpdateCategoryMutation();
+function BrandOperations({ setOpen, data }: BrandOperationsProps) {
+  const [createBrand, { isLoading: createBrandLoading }] =
+    useCreateBrandMutation();
+  const [updateBrand, { isLoading: updateBrandLoading }] =
+    useUpdateBrandMutation();
   const {
     t,
     i18n: { language },
@@ -57,10 +59,9 @@ function CategoryOperations({ setOpen, data }: CategoryOperationsProps) {
     initialValues: initialValues(data),
     validationSchema: validationSchema(t),
     onSubmit: (values, { resetForm }) => {
-      const { _id, image, ...rest } = values;
-      const categoryData = image ? { ...rest, image } : rest;
+      const { _id, ...rest } = values;
       if (data) {
-        updateCategory({ _id, data: categoryData })
+        updateBrand({ _id, data: rest })
           .unwrap()
           .then((res) => {
             toast.success(res.message);
@@ -70,7 +71,7 @@ function CategoryOperations({ setOpen, data }: CategoryOperationsProps) {
             toast.error(err.message);
           });
       } else {
-        createCategory(categoryData)
+        createBrand(rest)
           .unwrap()
           .then((res) => {
             toast.success(res.message);
@@ -86,7 +87,7 @@ function CategoryOperations({ setOpen, data }: CategoryOperationsProps) {
   const dir = language === "en" ? "ltr" : "rtl";
   return (
     <div className="h-full w-full" dir={dir}>
-      {(createCategoryLoading || updateCategoryLoading) && (
+      {(createBrandLoading || updateBrandLoading) && (
         <div className="absolute inset-0 bg-black-100/70 z-50 flex justify-center items-center">
           <CircularProgress color="primary" className="opacity-100" />
         </div>
@@ -135,11 +136,6 @@ function CategoryOperations({ setOpen, data }: CategoryOperationsProps) {
             </div>
             {/* product image */}
             <div className="flex flex-col gap-3">
-              {formik.touched.image && formik.errors.image && (
-                <div className="text-red-500 text-center pb-2 capitalize">
-                  {formik.errors.image}
-                </div>
-              )}
               <UploadHandler
                 value={formik.values.image}
                 onChange={(file) => {
@@ -147,6 +143,11 @@ function CategoryOperations({ setOpen, data }: CategoryOperationsProps) {
                 }}
                 error={formik.touched.image && formik.errors.image ? true : false}
               />
+              {formik.touched.image && formik.errors.image && (
+                <div className="text-red-500 text-center pb-2 capitalize">
+                  {formik.errors.image}
+                </div>
+              )}
             </div>
             {/* product images */}
           </div>
@@ -157,7 +158,7 @@ function CategoryOperations({ setOpen, data }: CategoryOperationsProps) {
               color="primary"
               className="py-2 px-8"
               type="submit"
-              disabled={createCategoryLoading || updateCategoryLoading}
+              disabled={createBrandLoading || updateBrandLoading}
             >
               {data ? t("edit") : t("create")}
             </Button>
@@ -169,4 +170,4 @@ function CategoryOperations({ setOpen, data }: CategoryOperationsProps) {
   );
 }
 
-export default CategoryOperations;
+export default BrandOperations;

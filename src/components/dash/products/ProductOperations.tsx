@@ -258,74 +258,74 @@ function ProductOperations({ data, setOpen }: ProductOperationsProps) {
                 multiline
                 maxRows={10}
               />
-              {categorySuccess && (
-                <CustomSelect
-                  dir={dir}
-                  data={categories?.data || []}
-                  label={t("categories")}
-                  name="category"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={
-                    typeof formik.values.category === "string"
-                      ? formik.values.category
-                      : formik.values.category._id
-                  }
-                  isError={
-                    formik.touched?.category && formik.errors?.category
-                      ? true
-                      : false
-                  }
-                />
-              )}
+
+              <CustomSelect
+                dir={dir}
+                data={categories?.data || []}
+                label={t("categories")}
+                name="category"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={
+                  typeof formik.values.category === "string"
+                    ? formik.values.category
+                    : formik.values.category._id
+                }
+                isError={
+                  formik.touched?.category && formik.errors?.category
+                    ? true
+                    : false
+                }
+              />
+
               {formik.touched.category && formik.errors.category && (
                 <div className="text-red-500 text-start pb-2 capitalize">
                   {formik.errors.category}
                 </div>
               )}
-              {subCategoriesSuccess && (
-                <CustomSelect
-                  dir={dir}
-                  data={subCategories?.data || []}
-                  label={t("subcategories")}
-                  name="subCategory"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={
-                    typeof formik.values.subCategory === "string"
-                      ? formik.values.subCategory
-                      : formik.values.subCategory._id
-                  }
-                  isError={
-                    formik.touched?.subCategory && formik.errors?.subCategory
-                      ? true
-                      : false
-                  }
-                />
-              )}
+
+              <CustomSelect
+                dir={dir}
+                data={subCategories?.data || []}
+                label={t("subcategories")}
+                name="subCategory"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={
+                  typeof formik.values.subCategory === "string"
+                    ? formik.values.subCategory
+                    : formik.values.subCategory._id
+                }
+                isError={
+                  formik.touched?.subCategory && formik.errors?.subCategory
+                    ? true
+                    : false
+                }
+              />
+
               {formik.touched.subCategory && formik.errors.subCategory && (
                 <div className="text-red-500 text-start pb-2 capitalize">
                   {formik.errors.subCategory}
                 </div>
               )}
-              {brandsSuccess && (
-                <CustomSelect
-                  dir={dir}
-                  data={brands?.data || []}
-                  label={t("brands")}
-                  name="brand"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={
-                    typeof formik.values.brand === "string"
-                      ? formik.values.brand
-                      : formik.values.brand._id
-                  }
-                  isError={
-                    formik.touched?.brand && formik.errors?.brand ? true : false
-                  }
-                />
-              )}
+
+              <CustomSelect
+                dir={dir}
+                data={brands?.data || []}
+                label={t("brands")}
+                name="brand"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={
+                  typeof formik.values.brand === "string"
+                    ? formik.values.brand
+                    : formik.values.brand._id
+                }
+                isError={
+                  formik.touched?.brand && formik.errors?.brand ? true : false
+                }
+              />
+
               {formik.touched.brand && formik.errors.brand && (
                 <div className="text-red-500 text-start pb-2 capitalize">
                   {formik.errors.brand}
@@ -365,11 +365,6 @@ function ProductOperations({ data, setOpen }: ProductOperationsProps) {
             {/* product text */}
             {/* product images */}
             <div className="flex flex-col gap-3">
-              {formik.touched.images && formik.errors.images && (
-                <div className="text-red-500 text-center pb-2 capitalize">
-                  {formik.errors.images}
-                </div>
-              )}
               <UploadHandler
                 onChange={(file) => {
                   formik.setFieldValue("images", [
@@ -377,7 +372,16 @@ function ProductOperations({ data, setOpen }: ProductOperationsProps) {
                     file,
                   ]);
                 }}
+                value={formik.values.images[formik.values.images.length - 1]}
+                error={
+                  formik.touched.images && formik.errors.images ? true : false
+                }
               />
+              {formik.touched.images && formik.errors.images && (
+                <div className="text-red-500 text-center pb-2 capitalize">
+                  {formik.errors.images}
+                </div>
+              )}
               <SelectedImages images={formik.values.images} formik={formik} />
             </div>
             {/* product images */}
