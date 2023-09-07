@@ -155,15 +155,13 @@ function ProductOperations({ data, setOpen }: ProductOperationsProps) {
     },
   });
 
-  const { data: categories, isSuccess: categorySuccess } =
-    useGetAllCategoriesQuery({
-      query: `?limit=1000`,
-    });
-  const { data: subCategories, isSuccess: subCategoriesSuccess } =
-    useGetAllSubCategoriesQuery({
-      query: `?limit=1000`,
-    });
-  const { data: brands, isSuccess: brandsSuccess } = useGetAllBrandsQuery({
+  const { data: categories } = useGetAllCategoriesQuery({
+    query: `?limit=1000`,
+  });
+  const { data: subCategories } = useGetAllSubCategoriesQuery({
+    query: `?limit=1000`,
+  });
+  const { data: brands } = useGetAllBrandsQuery({
     query: `?limit=1000`,
   });
 

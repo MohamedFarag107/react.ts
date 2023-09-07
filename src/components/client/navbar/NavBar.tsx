@@ -10,7 +10,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { HiMenu, HiShoppingCart } from "react-icons/hi";
-import { FaHeart, FaUserAlt } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { useState } from "react";
 import clsx from "clsx";
 import ApiRender from "../../ui/api/ApiRender";
@@ -81,6 +81,7 @@ const CategoryMenu = () => {
             <MenuItem
               onClick={() => handleClose(category._id)}
               key={category._id}
+              dir={language === "en" ? "ltr" : "rtl"}
             >
               {language === "en" ? category.name_en : category.name_ar}
             </MenuItem>
@@ -122,7 +123,7 @@ const NavIcons = () => {
   } = useTranslation();
   return (
     <>
-      <div className="icons h-10 grid grid-cols-3 md:grid-cols-4 gap-2">
+      <div className="icons h-10 grid grid-cols-4 gap-2">
         <Button
           variant="contained"
           className="p-0 !w-10 !h-10 text-white rounded-none flex justify-center items-center bg-primary hover:bg-secondary"
@@ -153,7 +154,7 @@ const NavIcons = () => {
             <FaHeart className="h-5 w-5" />
           </StyledBadge>
         </Button>
-        <Button
+        {/* <Button
           variant="contained"
           className="p-0 text-white rounded-none !h-10 !w-10 hidden md:flex justify-center items-center  bg-primary hover:bg-secondary"
           sx={{
@@ -162,10 +163,10 @@ const NavIcons = () => {
           onClick={() => navigate("/profile")}
         >
           <FaUserAlt />
-        </Button>
+        </Button> */}
         <Button
           variant="contained"
-          className="p-0 text-white rounded-none !h-10 !w-10 hidden md:flex justify-center items-center  bg-primary hover:bg-secondary"
+          className="p-0 !w-10 !h-10 text-white rounded-none flex justify-center items-center bg-primary hover:bg-secondary"
           sx={{
             minWidth: 0,
           }}
@@ -197,11 +198,13 @@ function NavBar() {
     <header className="h-20 flex justify-center items-center bg-white select-none">
       <nav className="container flex justify-between items-center">
         <div className="flex items-center gap-9">
-          <img
-            className="h-[70px] w-[70px] object-contain"
-            src="/images/logo.png"
-            alt={t("store")}
-          />
+          <Button color="primary" variant="text" onClick={() => navigate("/")}>
+            <img
+              className="h-[70px] w-[70px] object-contain"
+              src="/images/logo.png"
+              alt={t("store")}
+            />
+          </Button>
           <div className="hidden md:flex gap-5 items-center h-10">
             <Button
               className="h-full capitalize rounded-none bg-primary hover:bg-secondary"

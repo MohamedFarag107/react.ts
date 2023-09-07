@@ -1,26 +1,30 @@
 import { Route, Routes } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import React, { Suspense } from "react";
 import Layout from "./layout/Layout";
-import Home from "./pages/client/Home";
-import NotFound from "./pages/NotFound";
-import { Suspense } from "react";
-import Loading from "./pages/Loading";
+import DashLayout from "./layout/DashLayout";
 import Private from "./layout/Private";
+import NotFound from "./pages/NotFound";
+import Loading from "./pages/Loading";
+// ----------------- Client -----------------
+import Home from "./pages/client/Home";
 import Profile from "./pages/client/Profile";
 import Guest from "./pages/client/Guest";
-import { useTranslation } from "react-i18next";
 import Category from "./pages/client/Category";
 import Cart from "./pages/client/Cart";
 import Wishlist from "./pages/client/Wishlist";
-import DashLayout from "./layout/DashLayout";
+// ----------------- Client -----------------
+// ----------------- Dashboard -----------------
 import DashHome from "./pages/dash/home/DashHome";
 import DashOrders from "./pages/dash/orders/DashOrders";
-import DashProducts from "./pages/dash/products/DashProducts";
-import DashCategories from "./pages/dash/categories/DashCategories";
-import DashSubCategories from "./pages/dash/subcategories/DashSubCategories";
-import DashBrands from "./pages/dash/brands/DashBrands";
-import DashInstalments from "./pages/dash/instalments/DashInstalments";
-import DashSliders from "./pages/dash/sliders/DashSliders";
-import DashProfile from "./pages/dash/profile/DashProfile";
+const DashProducts = React.lazy(() => import("./pages/dash/products/DashProducts"));
+const DashCategories = React.lazy(() => import("./pages/dash/categories/DashCategories"));
+const DashSubCategories = React.lazy(() => import("./pages/dash/subcategories/DashSubCategories"));
+const DashBrands = React.lazy(() => import("./pages/dash/brands/DashBrands"));
+const DashInstalments = React.lazy(() => import("./pages/dash/instalments/DashInstalments"));
+const DashSliders = React.lazy(() => import("./pages/dash/sliders/DashSliders"));
+const DashProfile = React.lazy(() => import("./pages/dash/profile/DashProfile"));
+// ----------------- Dashboard -----------------
 import { Toaster } from "react-hot-toast";
 
 function App() {

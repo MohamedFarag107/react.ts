@@ -3,6 +3,9 @@ import { useGetAllProductsQuery } from "../../../api/product.api";
 import CustomPagination from "../../ui/pagination/CustomPagination";
 import { ProductCard, ProductCardSkeleton } from "./ProductCard";
 import InternetError from "../../ui/error/InternetError";
+import CustomSelect from "../../ui/input/CustomSelect";
+import { useGetAllCategoriesQuery } from "../../../api/category.api";
+import { useTranslation } from "react-i18next";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -15,9 +18,25 @@ const Layout = ({ children }: LayoutProps) => (
 
 function Products() {
   const [page, setPage] = useState(1);
+  const [category, setCategory] = useState("");
+
   const { data, isLoading, isError, isSuccess, error } = useGetAllProductsQuery(
-    { query: `?sort=-updatedAt&page=${page}` }
+    {
+      query: `?sort=-updatedAt&page=${page}${
+        category ? `&category=${category}` : ``
+      }`,
+    }
   );
+  const { data: categories } = useGetAllCategoriesQuery({
+    query: `?limit=1000`,
+  });
+
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+
+  const dir = language === "en" ? "ltr" : "rtl";
 
   const [totalPages, setTotalPages] = useState(1);
   useEffect(() => {
@@ -39,8 +58,21 @@ function Products() {
   }
 
   if (isError && error && "data" in error) {
+    if (page > 1) {
+      setPage(1);
+    }
     return (
       <Layout>
+        <CustomSelect
+          dir={dir}
+          data={categories?.data || []}
+          label={t("categories")}
+          name="category"
+          onChange={(e) => setCategory(e.target.value)}
+          onBlur={() => {}}
+          value={category || ""}
+          isError={false}
+        />
         <p className="text-red-600">{error.data.message}</p>
       </Layout>
     );
@@ -50,6 +82,16 @@ function Products() {
     const products = data.data;
     return (
       <Layout>
+        <CustomSelect
+          dir={dir}
+          data={categories?.data || []}
+          label={t("categories")}
+          name="category"
+          onChange={(e) => setCategory(e.target.value)}
+          onBlur={() => {}}
+          value={category || ""}
+          isError={false}
+        />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
           {products.map((product) => (
             <ProductCard key={product._id} product={product} />
