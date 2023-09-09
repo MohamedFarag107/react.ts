@@ -21,7 +21,7 @@ import { useGetAllCategoriesQuery } from "../../../api/category.api";
 
 const CategoryMenu = () => {
   const { data, isLoading, isSuccess, isError, error } =
-    useGetAllCategoriesQuery({ query: "?sort=createdAt" });
+    useGetAllCategoriesQuery({ query: "?sort=-createdAt" });
   const {
     t,
     i18n: { language },
@@ -40,7 +40,7 @@ const CategoryMenu = () => {
   const handleClose = (id: string) => {
     setOpen((prev) => !prev);
     if (typeof id === "string") {
-      navigate(`/category/${id}`);
+      navigate(`/category/products/${id}`);
     }
     setAnchorEl(null);
   };
@@ -109,7 +109,7 @@ const StyledBadge = styled(Badge)<BadgeProps>(() => ({
 
 const NavIcons = () => {
   const { data: cart, isSuccess: cartIsSuccess } = useGetMyCartQuery({
-    query: "?sort=createdAt",
+    query: "?sort=createdAt&limit=100",
   });
 
   const { data: wishlist, isSuccess: wishlistIsSuccess } =

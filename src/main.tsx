@@ -1,16 +1,18 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App.tsx";
-import "./index.css";
 import { Provider } from "react-redux";
-import { store } from "./api/store.ts";
-import "./translations/i18n.ts";
 import {
   CssBaseline,
   StyledEngineProvider,
   ThemeProvider,
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
+import App from "./App.tsx";
+import { store } from "./api/store.ts";
+import "./translations/i18n.ts";
+import "./index.css";
+// Import Swiper styles
+import "swiper/css";
 const theme = createTheme({
   palette: {
     primary: {

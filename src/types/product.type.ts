@@ -18,6 +18,7 @@ export interface Product {
   rating: number;
   sold: number;
   piecesSold: number;
+  finalPrice: number;
 }
 export interface GetAllProductsResponse extends BaseResponse {
   data: Product[];

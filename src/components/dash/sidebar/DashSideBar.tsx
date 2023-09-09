@@ -26,12 +26,12 @@ const LINKS = [
     name: "brands",
   },
   {
-    path: "/dashboard/instalments",
-    name: "instalments",
-  },
-  {
     path: "/dashboard/sliders",
     name: "slider",
+  },
+  {
+    path: "/dashboard/instalments",
+    name: "instalments",
   },
 ];
 

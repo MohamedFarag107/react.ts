@@ -82,5 +82,11 @@
   "discount_error_max": "discount must be a number less than price",
   "min_text": "minimum number of letters is {{min}} letters",
   "max_text": "maximum number of letters is {{max}} letters",
-  "no_data": "no data found"
+  "no_data": "no data found",
+  "title_ar": "Arabic Title",
+  "title_en": "English Title",
+  "details_ar": "Arabic Details",
+  "details_en": "English Details",
+  "view_all": "view all",
+  "SAR": "SAR"
 }

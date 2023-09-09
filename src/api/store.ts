@@ -10,6 +10,7 @@ import { brandApi } from "./brand.api";
 import { productApi } from "./product.api";
 import { uploadApi } from "./upload.api";
 import { subCategoryApi } from "./subCategory.api";
+import { sliderApi } from "./slider.api";
 
 const createStore = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const createStore = configureStore({
     [uploadApi.reducerPath]: uploadApi.reducer,
     [subCategoryApi.reducerPath]: subCategoryApi.reducer,
     [brandApi.reducerPath]: brandApi.reducer,
+    [sliderApi.reducerPath]: sliderApi.reducer,
     global: globalReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -34,7 +36,8 @@ const createStore = configureStore({
       productApi.middleware,
       uploadApi.middleware,
       subCategoryApi.middleware,
-      brandApi.middleware
+      brandApi.middleware,
+      sliderApi.middleware 
     ),
 });
 

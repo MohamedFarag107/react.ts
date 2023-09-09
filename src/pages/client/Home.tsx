@@ -1,5 +1,13 @@
+import HomeSlider from "../../components/client/sliders/HomeSlider";
+import HomeSubCategories from "../../components/client/subCategories/HomeSubCategories";
+
 function Home() {
-  return <div>Home</div>;
+  return (
+    <>
+      <HomeSlider />
+      <HomeSubCategories />
+    </>
+  );
 }
 
 export default Home;

@@ -8,9 +8,9 @@ export const cartApi = createApi({
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       if (token) {
-         headers.set("Authorization", `Bearer ${token}`);
+        headers.set("Authorization", `Bearer ${token}`);
       }
-       
+
       return headers;
     },
   }),
@@ -20,7 +20,27 @@ export const cartApi = createApi({
       query: ({ query = "" }) => `/me${query}`,
       providesTags: ["cart"],
     }),
+    toggleCart: builder.mutation<void, { product: string; quantity: number }>({
+      query: ({ product, quantity }) => ({
+        url: `/toggle`,
+        body: { product, quantity },
+        method: "POST",
+      }),
+      invalidatesTags: ["cart"],
+    }),
+    updateQuantity: builder.mutation<void, { _id: string; quantity: number }>({
+      query: ({ _id, quantity }) => ({
+        url: `/${_id}`,
+        body: { quantity },
+        method: "PUT",
+      }),
+      invalidatesTags: ["cart"],
+    }),
   }),
 });
 
-export const { useGetMyCartQuery } = cartApi;
+export const {
+  useGetMyCartQuery,
+  useUpdateQuantityMutation,
+  useToggleCartMutation,
+} = cartApi;
