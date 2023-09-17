@@ -83,7 +83,7 @@ function BrandOperations({ setOpen, data }: SliderOperationsProps) {
             setOpen(false);
           })
           .catch((err) => {
-            toast.error(err.message);
+            toast.error(err.data.message);
           });
       } else {
         createSlider(rest)

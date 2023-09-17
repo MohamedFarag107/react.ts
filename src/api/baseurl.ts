@@ -1,1 +1,1 @@
-export const baseUrl = `http://localhost:4444/api/v1`
+export const baseUrl = `https://mofarag.me/api/v1`

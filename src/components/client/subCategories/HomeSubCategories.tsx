@@ -35,7 +35,7 @@ function HomeSubCategories() {
               <HomeSubCategory subCategory={subCategory} />
               <img
                 src={sliders[randomIndex(sliders.length)]}
-                className="w-full object-center  object-contain max-h-96 my-10"
+                className="w-full object-center  object-cover  my-10"
                 alt="slider"
               />
             </Fragment>
